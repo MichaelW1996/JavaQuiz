@@ -5,6 +5,29 @@ var quiz = [
   "The condition in an if / else statement is enclosed with _________.",
   "String values must be enclosed within ________ when being assigned to variables.",
 ]
+var question1 = {
+    Q:"What symbol is used to contain an object?",
+    A1:"()",
+    A2:"[]",
+    A3:"<>",
+    A4:"{}",
+    CA: "A4",
+}
+
+var question2 = {
+    Q:" The statement '2' === 2 would return",
+    A1:"true, because statement is checking the values are same ",
+    A2:"false, because the statement checks for value and data type",
+    A3:"undefined, because statement is not for this purpose",
+    A4:"false, because the statement checks the data type only",
+    CA: "A2",
+}
+
+// console.log(question1)
+var answerkey = question1.CA
+console.log(question1[answerkey])
+// console.log(question2)
+
 var answersOne = ["1. JavaScript", "2. terminal", "3. for loops", "4. console.log"]
 var answersTwo = ["1. quotes", "2. curly brackets", "3. parenthesis", "4. square brackets"]
 var answersThree = ["1. commas", "2. curly brackets", "3. quotes", "4. parenthesis"]
