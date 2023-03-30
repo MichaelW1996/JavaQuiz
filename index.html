@@ -1,42 +1,47 @@
 <!DOCTYPE html>
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Java Quiz</title>
     <link rel="stylesheet" href="./assets/style.css" />
+    <!--Attaches my styling -->
   </head>
 
   <!-- Main content -->
   <body>
     <header>
-      <!-- link to a separate html showing high score collated from local storage -->
+      <!-- Buttons to show highscore, reset to quiz and a button to clear scores -->
       <button id="ScoreButton">View high score</button>
       <button id="ResetButton" class="hidden">Back to the quiz</button>
       <button id="StorageClear" class="hidden">Clear Scores</button>
-      <!-- a count down timer -->
-      <time class="time"></time>
+      <!-- The count down timer -->
+      <p class="time"></p>
     </header>
 
+    <!-- Main section of questions -->
     <main id="MainQuestion">
       <!-- some elements are hidden and displayed and content changed dependent on commands in JS -->
-      <h1 id="question">Quiz/title</h1>
+      <h1 id="question">JS Quiz</h1>
+      <!--This will be filled with either a welcome title or the questions, based on the JS-->
       <p id="desc">
+        <!--Quiz description hidden once quiz starts -->
         Try to answer the following code-related questions within the time
         limit. Keep in mind that incorrect answers will penalize your
         score/time.
       </p>
-      <div id="quiz">
-        <button value="val1" class="choice" id="one">choice1</button>
-        <button value="val2" class="choice" id="two">choice2</button>
-        <button value="val3" class="choice" id="three">choice3</button>
-        <button value="val4" class="choice" id="four">choice4</button>
+      <div id="quiz" class="hidden">
+        <!--Quiz answers to select, with text generated in JS-->
+        <button value="val1" class="choice" id="one"></button>
+        <button value="val2" class="choice" id="two"></button>
+        <button value="val3" class="choice" id="three"></button>
+        <button value="val4" class="choice" id="four"></button>
       </div>
 
-      <p id="score">Your final score is <span id="secondLeft"></span></p>
-      <form id="input" method="POST">
+      <p id="score" class="hidden">
+        Your final score is <span id="secondLeft"></span>
+      </p>
+      <!-- Score display after quiz, this is not visible till after the quiz-->
+      <form id="input" class="hidden" method="POST">
         <label for="initial">Enter initials: </label>
         <input
           type="text"
@@ -44,16 +49,19 @@
           name="initials"
           id="candidate"
         />
-        <button class="select" id="submit">submit</button>
+        <!-- Take the users details for the high scores -->
+        <button class="select hidden" id="submit">submit</button>
       </form>
       <container>
         <button class="select" id="start">start</button>
-
-        <output id="output">output</output>
+        <!--Start the quiz with this button-->
+        <p id="output" class="hidden"></p>
+        <!--Correct / incorrect response  -->
       </container>
     </main>
 
     <main id="MainScores" class="hidden">
+      <!--High scores, this is hidden by default-->
       <h1>High Scores</h1>
       <container id="ScoresContainer">
         <card id="TableHeader">
@@ -64,10 +72,12 @@
     </main>
 
     <footer>
+      <!--Footer at the bottom with my github linked -->
       <h4>Thanks for checking out my little quiz</h4>
-      <p>Michael Walters 2023</p>
+      <a href="https://github.com/MichaelW1996">Michael Walters 2023</a>
     </footer>
 
     <script src="./assets/script.js"></script>
+    <!--Attaches my js file-->
   </body>
 </html>

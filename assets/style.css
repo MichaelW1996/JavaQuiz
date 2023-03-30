@@ -1,34 +1,25 @@
-/* settings for the whole html */
+:root {
+  /*variable colours, can be changed easily by being grouped here*/
+  --orange: rgb(240, 166, 27);
+  --blue: rgb(15, 221, 228);
+  --grey: rgb(189, 189, 189);
+  --text: white;
+}
+
+/* Universal styling to text family */
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* settings for id=header */
-
-/* settings for <a> elements in id=header */
-header a {
-  padding: 10px;
-  margin: 5px;
-}
-
-/* settings for <time> elements in id=header */
-header time {
+/* Style for the timer */
+header #time {
   position: absolute;
   right: 10px;
   padding: 10px;
   margin: 5px;
 }
 
-footer {
-  position: fixed;
-  bottom: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 95vw;
-}
-
-/* settings for id=main-content */
+/* Style for main body */
 main {
   display: flex;
   flex-direction: column;
@@ -37,7 +28,7 @@ main {
   padding-right: 25%;
 }
 
-/* settings for <h1> element in id=main-content */
+/* Style for question text */
 main h1 {
   text-align: center;
   margin: 5px;
@@ -45,28 +36,29 @@ main h1 {
   width: 400px;
 }
 
-/* settings for <p> element in id=main-content */
+/* Style for <p> elements in main */
 main p {
+  text-align: center;
   margin: 5px;
   padding-bottom: 20px;
   width: 400px;
 }
 
-/* settings for class=select refering to start and submit buttons*/
+/* Style for submit and start buttons*/
 .select {
-  background-color: rgb(50, 29, 92);
-  color: white;
+  background-color: var(--blue);
+  color: var(--text);
   border-radius: 5px;
   padding: 5px;
   margin: 5px;
 }
 
-/* settings for class=choice refering to a list of answers */
+/* styles for answers */
 .choice {
   display: flex;
   flex-direction: column;
-  background-color: rgb(50, 29, 92);
-  color: white;
+  background-color: var(--blue);
+  color: var(--text);
   border-radius: 5px;
   padding: 15px;
   margin-left: 0px;
@@ -74,45 +66,65 @@ main p {
   width: 175px;
 }
 
-/* settings for class=choice when the cursor hovers over the answer buttons */
+/* Style for answer when the user hovers over */
 .choice:hover {
-  background-color: rgb(248, 120, 255);
+  background-color: var(--orange);
 }
-
-/* settings for class=choice when the answer button is clicked */
-.choice:focus {
-  background-color: rgb(248, 120, 255);
-}
+/*center the questions*/
 #quiz {
   align-self: center;
 }
+/*Form for initals after completion*/
 #input {
+  display: flex;
   align-items: center;
 }
 
-/* settings for <output> element within id=main-content */
-main output {
+/* styling for the correct/wrong element within main */
+main #output {
   width: 400px;
   padding-top: 15px;
   margin: 5px;
   margin-top: 20px;
-  border-top: solid lightgrey;
-  color: lightgrey;
+  /*line to seperate from answers*/
+  border-top: solid var(--grey);
+  color: var(--grey);
 }
 
 card {
+  /*allows us to have inital and score on same line*/
   display: flex;
 }
 #TableHeader {
+  /*gives a black line on the bottom of the header to seperate from score*/
   border-bottom: 3px solid black;
 }
+/* sets the container size to not fill the page */
 #ScoresContainer {
   max-width: 50vw;
 }
+
+/* Puts name on left */
+card p:nth-child(1) {
+  text-align: start;
+}
+
+/* puts the score on the right */
 card p:nth-child(2) {
   text-align: end;
 }
 
+/*Things i want hidden, using the important tag to override more specific rules*/
 .hidden {
-  display: none;
+  display: none !important;
+}
+
+/* Footer styling */
+footer {
+  position: fixed;
+  bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 95vw;
 }

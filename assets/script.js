@@ -23,21 +23,6 @@ var three = document.getElementById("three");
 var four = document.getElementById("four");
 var ScoreButton = document.getElementById("ScoreButton");
 
-// function to set the content of start page when it's refreshed
-function initial() {
-  question.textContent = challenge; //sets the question text as the title of the quiz
-  main.style.alignItems = "center"; //centers quiz name
-  main.style.textAlign = "center";
-  quizButton.style.display = "none"; //makes other elements invisble
-  score.style.display = "none";
-  input.style.display = "none";
-  submitButton.style.display = "none";
-  output.style.display = "none";
-  output.textContent = "";
-}
-// calling function initial
-initial();
-
 //The questions, saved as objects
 var question1 = {
   Q: "What symbol is used to contain an object?", //question
@@ -130,29 +115,31 @@ startButton.addEventListener("click", function start() {
 
   // changes the element display status, text alignments, and box alignments
   document.getElementById("desc").style.display = "none";
-  quizButton.style.display = "block";
+  quizButton.classList.remove("hidden");
   startButton.style.display = "none";
-  output.style.display = "block";
+  // output.style.display = "block";
+  output.classList.remove("hidden");
 
   qtext(0); //runs qtext function to get text value for questions and answers on the first question (0 index)
 
   //end function to be triggered by final question answered or by timer running out
   var endFunction = function () {
     clearInterval(timerInterval); //kill the timer
-    question.textContent = Done;
-    quizButton.style.display = "none";
-    score.style.display = "block";
-    input.style.display = "flex";
-    submitButton.style.display = "block";
-    output.style.display = "none";
+    question.textContent = Done; //display a completion message
+    quizButton.className = "hidden"; //hide the answer boxes
+    score.classList.remove("hidden"); //show score
+    input.classList.remove("hidden"); //show input feild for givin intital for highscore
+    submitButton.classList.remove("hidden");
+    output.className = "hidden";
     score.textContent = "Your score is: " + secondsLeft;
-    ScoreButton.className = "";
+    ScoreButton.classList.remove("hidden");
   };
 
-  // When a button is clicked, it calls the following function
+  // When button is clicked, it calls the following function
   quizButton.addEventListener("click", function (event) {
-    checker(event);
+    checker(event); //checks the button clicked is the correct answer
     if (Qnumber == QuestionArray.length) {
+      //if the current question is the last
       endFunction(); //end the quiz
     }
   });
@@ -160,17 +147,19 @@ startButton.addEventListener("click", function start() {
 
 // When submit button is clicked, it stores the value entered in <form> in local storage
 submitButton.addEventListener("click", function submit() {
-  let OldScores = localStorage.getItem("Score");
+  let OldScores = localStorage.getItem("Score"); //gets the current value of score in local storage
   if (OldScores == "No High scores yet") {
-    localStorage.clear();
-    localStorage.setItem("Score", `${candidate.value};${secondsLeft}`);
+    //if the default message is the only item in storage
+    localStorage.clear(); //get rid of the message
+    localStorage.setItem("Score", `${candidate.value};${secondsLeft}`); //add the score with inital
   } else {
+    //if there was already 1 or more scores
     localStorage.setItem(
       "Score",
-      `${OldScores},${candidate.value};${secondsLeft}`
+      `${OldScores},${candidate.value};${secondsLeft}` //set the value to the old score(s) then the newest score
     );
   }
-  location.reload();
+  location.reload(); //reset the page to allow user to reattempt
 });
 
 candidate.addEventListener("keypress", function (event) {
@@ -182,43 +171,45 @@ candidate.addEventListener("keypress", function (event) {
   }
 });
 
-//high scores logic
+//High scores
 
+//Elements only used by High scores
 var ScoreContainer = document.getElementById("ScoresContainer");
 var ResetButton = document.getElementById("ResetButton");
 var StorageClear = document.getElementById("StorageClear");
+var ScoreMain = document.getElementById("MainScores");
+var QuestionMain = document.getElementById("MainQuestion");
 
 var PullScores = function () {
-  var ScoreObject = localStorage.getItem("Score").split(",");
+  //gets scores from local storage and splits them into different strings
+  var ScoreObject = localStorage.getItem("Score").split(","); //splits into "inital;score"
   ScoreObject.forEach((score) => {
-    const Scoredata = score.split(";");
-    const ScoreCard = document.createElement("card");
+    const Scoredata = score.split(";"); //splits into an array of [inital, score]
+    const ScoreCard = document.createElement("card"); //make the elements to hold the score
     const ScoreName = document.createElement("p");
     const ScoreNumber = document.createElement("p");
-    ScoreName.textContent = Scoredata[0];
-    ScoreNumber.textContent = Scoredata[1];
-    ScoreCard.append(ScoreName, ScoreNumber);
-    ScoreContainer.append(ScoreCard);
+    ScoreName.textContent = Scoredata[0]; //insert inital
+    ScoreNumber.textContent = Scoredata[1]; //insert score
+    ScoreCard.append(ScoreName, ScoreNumber); //add to card
+    ScoreContainer.append(ScoreCard); //put the card in the container
   });
 };
 
 var displayswitch = function () {
-  var ScoreMain = document.getElementById("MainScores");
-  var QuestionMain = document.getElementById("MainQuestion");
+  //Hides unwanted content for scores and unhides the score board
   QuestionMain.className = "hidden";
   ScoreButton.className = "hidden";
   ScoreMain.classList.remove("hidden");
   ResetButton.classList.remove("hidden");
   StorageClear.classList.remove("hidden");
 };
-//switches the quiz off
-//Switches scores on
-//removes button
+
 ScoreButton.addEventListener("click", function () {
-  //hide quiz
+  if (localStorage.getItem("Score") == null) {
+    localStorage.setItem("Score", "No High scores yet");
+  }
   PullScores();
   displayswitch();
-  //unhide scores
 });
 ResetButton.addEventListener("click", function () {
   location.reload();
