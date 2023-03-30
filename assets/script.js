@@ -147,6 +147,8 @@ startButton.addEventListener("click", function start() {
 
 // When submit button is clicked, it stores the value entered in <form> in local storage
 submitButton.addEventListener("click", function submit() {
+  event.preventDefault();
+  console.log("Triggered");
   let OldScores = localStorage.getItem("Score"); //gets the current value of score in local storage
   if (OldScores == "No High scores yet") {
     //if the default message is the only item in storage
@@ -159,10 +161,12 @@ submitButton.addEventListener("click", function submit() {
       `${OldScores},${candidate.value};${secondsLeft}` //set the value to the old score(s) then the newest score
     );
   }
-  location.reload(); //reset the page to allow user to reattempt
+  location.reload();
+  //reset the page to allow user to reattempt
 });
 
 candidate.addEventListener("keypress", function (event) {
+  event.preventDefault();
   //listen for keypress in the candidate box
   if (event.key === "Enter") {
     // if the key is enter
