@@ -166,7 +166,6 @@ submitButton.addEventListener("click", function submit() {
 });
 
 candidate.addEventListener("keypress", function (event) {
-  event.preventDefault();
   //listen for keypress in the candidate box
   if (event.key === "Enter") {
     // if the key is enter
