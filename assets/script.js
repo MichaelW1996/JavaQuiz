@@ -95,6 +95,10 @@ var checker = function (event) {
     output.textContent = "Wrong!"; //Wrong text at the bottom
     //Idea? Style incorect answers?
     secondsLeft = secondsLeft - penalty; //A penalty score is applied - penalty is defined in the timer
+    //changed to match required behaviour
+    Qnumber++; //Next question
+    qtext(Qnumber); //generate text for next question
+    return;
   }
 };
 
