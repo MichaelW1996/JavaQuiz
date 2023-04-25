@@ -6,7 +6,7 @@
 
 <br>
 
-Link to live site: https://michaelw1996.github.io/Portfolio/JavaQuiz
+Link to live site: https://michaelw1996.github.io/JavaQuiz/
 
 <br>
 
